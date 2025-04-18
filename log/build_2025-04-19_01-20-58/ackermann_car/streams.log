@@ -1,0 +1,38 @@
+[1.665s] Invoking command in '/home/wcy/ros2_ws/src/ackermann_car': PYTHONPATH=/home/wcy/ros2_ws/build/ackermann_car/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/wcy/ros2_ws/install/ackermann_car/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/ackermann_car build --build-base /home/wcy/ros2_ws/build/ackermann_car/build install --record /home/wcy/ros2_ws/build/ackermann_car/install.log --single-version-externally-managed install_data
+[2.340s] running egg_info
+[2.342s] creating ../../build/ackermann_car/ackermann_car.egg-info
+[2.342s] writing ../../build/ackermann_car/ackermann_car.egg-info/PKG-INFO
+[2.343s] writing dependency_links to ../../build/ackermann_car/ackermann_car.egg-info/dependency_links.txt
+[2.344s] writing entry points to ../../build/ackermann_car/ackermann_car.egg-info/entry_points.txt
+[2.344s] writing requirements to ../../build/ackermann_car/ackermann_car.egg-info/requires.txt
+[2.344s] writing top-level names to ../../build/ackermann_car/ackermann_car.egg-info/top_level.txt
+[2.345s] writing manifest file '../../build/ackermann_car/ackermann_car.egg-info/SOURCES.txt'
+[2.350s] reading manifest file '../../build/ackermann_car/ackermann_car.egg-info/SOURCES.txt'
+[2.352s] writing manifest file '../../build/ackermann_car/ackermann_car.egg-info/SOURCES.txt'
+[2.352s] running build
+[2.353s] running build_py
+[2.353s] creating /home/wcy/ros2_ws/build/ackermann_car/build
+[2.353s] creating /home/wcy/ros2_ws/build/ackermann_car/build/lib
+[2.354s] creating /home/wcy/ros2_ws/build/ackermann_car/build/lib/ackermann_car
+[2.354s] copying ackermann_car/__init__.py -> /home/wcy/ros2_ws/build/ackermann_car/build/lib/ackermann_car
+[2.354s] running install
+[2.355s] running install_lib
+[2.356s] creating /home/wcy/ros2_ws/install/ackermann_car/lib/python3.10/site-packages/ackermann_car
+[2.357s] copying /home/wcy/ros2_ws/build/ackermann_car/build/lib/ackermann_car/__init__.py -> /home/wcy/ros2_ws/install/ackermann_car/lib/python3.10/site-packages/ackermann_car
+[2.358s] byte-compiling /home/wcy/ros2_ws/install/ackermann_car/lib/python3.10/site-packages/ackermann_car/__init__.py to __init__.cpython-310.pyc
+[2.359s] running install_data
+[2.359s] creating /home/wcy/ros2_ws/install/ackermann_car/share/ament_index
+[2.360s] creating /home/wcy/ros2_ws/install/ackermann_car/share/ament_index/resource_index
+[2.360s] creating /home/wcy/ros2_ws/install/ackermann_car/share/ament_index/resource_index/packages
+[2.361s] copying resource/ackermann_car -> /home/wcy/ros2_ws/install/ackermann_car/share/ament_index/resource_index/packages
+[2.361s] copying package.xml -> /home/wcy/ros2_ws/install/ackermann_car/share/ackermann_car
+[2.362s] creating /home/wcy/ros2_ws/install/ackermann_car/share/ackermann_car/launch
+[2.362s] copying launch/gazebo.launch.py -> /home/wcy/ros2_ws/install/ackermann_car/share/ackermann_car/launch
+[2.362s] creating /home/wcy/ros2_ws/install/ackermann_car/share/ackermann_car/worlds
+[2.362s] copying worlds/ackermann_world.sdf -> /home/wcy/ros2_ws/install/ackermann_car/share/ackermann_car/worlds
+[2.363s] running install_egg_info
+[2.367s] Copying ../../build/ackermann_car/ackermann_car.egg-info to /home/wcy/ros2_ws/install/ackermann_car/lib/python3.10/site-packages/ackermann_car-0.0.0-py3.10.egg-info
+[2.370s] running install_scripts
+[2.428s] Installing motion_controller script to /home/wcy/ros2_ws/install/ackermann_car/lib/ackermann_car
+[2.429s] writing list of installed files to '/home/wcy/ros2_ws/build/ackermann_car/install.log'
+[2.494s] Invoked command in '/home/wcy/ros2_ws/src/ackermann_car' returned '0': PYTHONPATH=/home/wcy/ros2_ws/build/ackermann_car/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/wcy/ros2_ws/install/ackermann_car/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/ackermann_car build --build-base /home/wcy/ros2_ws/build/ackermann_car/build install --record /home/wcy/ros2_ws/build/ackermann_car/install.log --single-version-externally-managed install_data
