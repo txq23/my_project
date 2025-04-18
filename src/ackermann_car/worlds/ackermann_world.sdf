@@ -350,82 +350,91 @@
     </model>
 
     <!-- 动态障碍物（移动的箱子） -->
+<!-- 移动的箱子 -->
+<!-- 自动移动的箱子 -->
     <model name="moving_box">
       <pose>-3 0 0.25 0 0 0</pose>
       <link name="link">
         <inertial>
-          <mass>1.0</mass>
+          <mass>10.0</mass>  <!-- 增大质量提高稳定性 -->
           <inertia>
-            <ixx>0.04167</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>0.04167</iyy>
-            <iyz>0</iyz>
+            <ixx>0.04167</ixx> <ixy>0</ixy> <ixz>0</ixz>
+            <iyy>0.04167</iyy> <iyz>0</iyz>
             <izz>0.04167</izz>
           </inertia>
         </inertial>
         <collision name="collision">
-          <geometry>
-            <box>
-              <size>0.5 0.5 0.5</size>
-            </box>
-          </geometry>
+          <geometry><box><size>0.5 0.5 0.5</size></box></geometry>
           <surface>
             <friction>
-              <ode>
-                <mu>0.3</mu>
-                <mu2>0.3</mu2>
-              </ode>
+              <ode><mu>0.3</mu> <mu2>0.3</mu2></ode>
             </friction>
           </surface>
         </collision>
         <visual name="visual">
-          <geometry>
-            <box>
-              <size>0.5 0.5 0.5</size>
-            </box>
-          </geometry>
+          <geometry><box><size>0.5 0.5 0.5</size></box></geometry>
           <material>
             <ambient>1 0.5 0 1</ambient>
             <diffuse>1 0.5 0 1</diffuse>
           </material>
         </visual>
       </link>
+      
+      <!-- 滑动关节配置 -->
+      <joint name="sliding_joint" type="prismatic">
+        <parent>world</parent>
+        <child>link</child>
+        <axis>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-4.0</lower>
+            <upper>4.0</upper>
+            <effort>1000</effort>  <!-- 最大输出力 1000N -->
+            <stiffness>1e5</stiffness>  <!-- 关节刚度 -->
+            <dissipation>1.0</dissipation>  <!-- 阻尼系数 -->
+          </limit>
+        </axis>
+      </joint>
+
       <!-- 速度控制插件 -->
-      <plugin filename="libignition-gazebo-velocity-control-system.so"
-              name="ignition::gazebo::systems::VelocityControl">
-        <link_name>link</link_name>
-        <velocity_topic>/model/moving_box/cmd_vel</velocity_topic>
+      <plugin filename="libignition-gazebo-joint-controller-system.so"
+              name="ignition::gazebo::systems::JointController">
+        <joint_name>sliding_joint</joint_name>
+        <use_velocity_control>true</use_velocity_control>
+        <velocity>0.5</velocity>  <!-- 初始速度 0.5 m/s -->
+        <pid>
+          <p>15.0</p>  <!-- 比例增益 -->
+          <i>0.0</i>    <!-- 积分项 (禁用) -->
+          <d>1.0</d>    <!-- 微分项 -->
+        </pid>
       </plugin>
     </model>
 
-    <!-- 动态障碍物（移动的圆柱） -->
+    <!-- 持续旋转的圆柱体 -->
+<!-- 持续旋转的圆柱体 -->
     <model name="moving_cylinder">
       <pose>3 -5 0.5 0 0 0</pose>
       <link name="link">
         <inertial>
-          <mass>1.0</mass>
+          <mass>5.0</mass>
           <inertia>
-            <ixx>0.03333</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>0.03333</iyy>
-            <iyz>0</iyz>
-            <izz>0.045</izz>
+            <ixx>0.4583</ixx>
+            <iyy>0.4583</iyy>
+            <izz>0.375</izz>
           </inertia>
         </inertial>
         <collision name="collision">
           <geometry>
             <cylinder>
               <radius>0.3</radius>
-              <height>1</height>
+              <height>1.0</height>
             </cylinder>
           </geometry>
           <surface>
             <friction>
               <ode>
-                <mu>0.3</mu>
-                <mu2>0.3</mu2>
+                <mu>0.1</mu>  <!-- 降低摩擦系数 -->
+                <mu2>0.1</mu2>
               </ode>
             </friction>
           </surface>
@@ -434,7 +443,7 @@
           <geometry>
             <cylinder>
               <radius>0.3</radius>
-              <height>1</height>
+              <height>1.0</height>
             </cylinder>
           </geometry>
           <material>
@@ -443,19 +452,31 @@
           </material>
         </visual>
       </link>
-      <!-- 旋转关节控制 -->
-      <joint name="rotating_joint" type="revolute">
+
+      <joint name="sliding_joint" type="prismatic">
         <parent>world</parent>
         <child>link</child>
         <axis>
-          <xyz>0 0 1</xyz>
+          <xyz>1 0 0</xyz>
+          <limit>
+            <lower>-5.0</lower>
+            <upper>5.0</upper>
+            <effort>1000</effort>
+            <stiffness>1e5</stiffness>
+          </limit>
         </axis>
       </joint>
+
+      <!-- 正弦速度控制插件 -->
       <plugin filename="libignition-gazebo-joint-controller-system.so"
               name="ignition::gazebo::systems::JointController">
-        <joint_name>rotating_joint</joint_name>
+        <joint_name>sliding_joint</joint_name>
         <use_velocity_control>true</use_velocity_control>
-        <initial_velocity>0.0</initial_velocity> <!-- 初始速度 -->
+        <velocity>0.0</velocity>  <!-- 初始速度为0，由脚本控制 -->
+        <pid>
+          <p>50.0</p>
+          <d>2.0</d>
+        </pid>
       </plugin>
     </model>
 
