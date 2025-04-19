@@ -1,3 +1,0 @@
-[console_scripts]
-motion_controller = ackermann_car.nodes.motion_controller:main
-

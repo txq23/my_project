@@ -45,8 +45,8 @@ def generate_launch_description():
         # 4. 启动运动控制节点
         Node(
             package='ackermann_car',
-            executable='motion_controller.py',
-            name='motion_controller',
+            executable='world_controller',  # 与 entry_points 中的名称一致
+            name='world_controller',
             output='screen'
         )
     ])
