@@ -26,7 +26,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-             'motion_controller = ackermann_car.nodes.motion_controller:main',
+            'world_controller = ackermann_car.controller.world_ctrl:main',
         ],
     },
 )

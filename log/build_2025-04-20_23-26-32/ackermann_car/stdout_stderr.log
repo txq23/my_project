@@ -1,0 +1,26 @@
+running develop
+running egg_info
+creating ackermann_car.egg-info
+writing ackermann_car.egg-info/PKG-INFO
+writing dependency_links to ackermann_car.egg-info/dependency_links.txt
+writing entry points to ackermann_car.egg-info/entry_points.txt
+writing requirements to ackermann_car.egg-info/requires.txt
+writing top-level names to ackermann_car.egg-info/top_level.txt
+writing manifest file 'ackermann_car.egg-info/SOURCES.txt'
+reading manifest file 'ackermann_car.egg-info/SOURCES.txt'
+writing manifest file 'ackermann_car.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/wcy/ros2_ws/install/ackermann_car/lib/python3.10/site-packages/ackermann-car.egg-link (link to .)
+Installing world_controller script to /home/wcy/ros2_ws/install/ackermann_car/lib/ackermann_car
+
+Installed /home/wcy/ros2_ws/build/ackermann_car
+running symlink_data
+creating /home/wcy/ros2_ws/install/ackermann_car/share/ament_index
+creating /home/wcy/ros2_ws/install/ackermann_car/share/ament_index/resource_index
+creating /home/wcy/ros2_ws/install/ackermann_car/share/ament_index/resource_index/packages
+symbolically linking /home/wcy/ros2_ws/build/ackermann_car/resource/ackermann_car -> /home/wcy/ros2_ws/install/ackermann_car/share/ament_index/resource_index/packages
+symbolically linking /home/wcy/ros2_ws/build/ackermann_car/package.xml -> /home/wcy/ros2_ws/install/ackermann_car/share/ackermann_car
+creating /home/wcy/ros2_ws/install/ackermann_car/share/ackermann_car/launch
+symbolically linking /home/wcy/ros2_ws/build/ackermann_car/launch/gazebo.launch.py -> /home/wcy/ros2_ws/install/ackermann_car/share/ackermann_car/launch
+creating /home/wcy/ros2_ws/install/ackermann_car/share/ackermann_car/worlds
+symbolically linking /home/wcy/ros2_ws/build/ackermann_car/worlds/ackermann_world.sdf -> /home/wcy/ros2_ws/install/ackermann_car/share/ackermann_car/worlds

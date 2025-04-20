@@ -12,10 +12,12 @@
   <test_depend>ament_pep257</test_depend>
   <test_depend>python3-pytest</test_depend>
 
-  <exec_depend>ros_ign_bridge</exec_depend>
-  <exec_depend>geometry_msgs</exec_depend>
-  <exec_depend>std_msgs</exec_depend>
-  <exec_depend>rclpy</exec_depend>
+  <depend>rclpy</depend>
+  <depend>geometry_msgs</depend>
+  <depend>ros_gz_interfaces</depend>
+  <depend>tf_transformations</depend>
+  <exec_depend>ros_gz_bridge</exec_depend>
+
 
 
   <export>
