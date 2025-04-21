@@ -2,6 +2,7 @@
 <sdf version="1.9">
   <world name="ackermann_world">
     <!-- 全局光照（室内灯光） -->
+    
     <light type="point" name="ceiling_light1">
       <cast_shadows>true</cast_shadows>
       <pose>0 0 3 0 0 0</pose>
