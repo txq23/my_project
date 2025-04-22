@@ -1,1 +1,556 @@
-/home/wcy/ros2_ws/build/ackermann_car/worlds/ackermann_world.sdf
+<?xml version="1.0" ?>
+<sdf version="1.9">
+  <world name="ackermann_world">
+    <!-- 全局光照（室内灯光） -->
+    
+    <light type="point" name="ceiling_light1">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 3 0 0 0</pose>
+      <diffuse>0.9 0.9 0.8 1</diffuse>
+      <specular>0.1 0.1 0.1 1</specular>
+      <attenuation>
+        <range>10</range>
+        <linear>0.1</linear>
+        <constant>0.9</constant>
+        <quadratic>0.01</quadratic>
+      </attenuation>
+    </light>
+    <light type="point" name="ceiling_light2">
+      <cast_shadows>true</cast_shadows>
+      <pose>6 -6 3 0 0 0</pose>
+      <diffuse>0.9 0.9 0.8 1</diffuse>
+      <specular>0.1 0.1 0.1 1</specular>
+      <attenuation>
+        <range>8</range>
+        <linear>0.1</linear>
+        <constant>0.9</constant>
+        <quadratic>0.01</quadratic>
+      </attenuation>
+    </light>
+
+    <!-- 物理引擎设置 -->
+    <physics name="default_physics" type="dart">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+
+    <!-- 插件 -->
+    <plugin filename="libignition-gazebo6-physics-system.so" name="gz::sim::systems::Physics"/>
+    <plugin filename="libignition-gazebo6-user-commands-system.so" name="gz::sim::systems::UserCommands"/>
+    <plugin filename="libignition-gazebo6-scene-broadcaster-system.so" name="gz::sim::systems::SceneBroadcaster"/>
+
+    <!-- 地面（木板颜色） -->
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>30 30</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.3</mu>
+                <mu2>0.3</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>30 30</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.4 0.2 0.1 1</ambient>
+            <diffuse>0.5 0.3 0.15 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- 四面环抱的墙壁 -->
+    <model name="outer_walls">
+      <static>true</static>
+      <link name="link">
+        <!-- 北墙 -->
+        <collision name="north_wall_collision">
+          <pose>0 15 1.5 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>30 0.2 3</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="north_wall_visual">
+          <pose>0 15 1.5 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>30 0.2 3</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>0.9 0.9 0.9 1</diffuse>
+          </material>
+        </visual>
+        <!-- 南墙 -->
+        <collision name="south_wall_collision">
+          <pose>0 -15 1.5 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>30 0.2 3</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="south_wall_visual">
+          <pose>0 -15 1.5 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>30 0.2 3</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>0.9 0.9 0.9 1</diffuse>
+          </material>
+        </visual>
+        <!-- 东墙 -->
+        <collision name="east_wall_collision">
+          <pose>15 0 1.5 0 0 1.57</pose>
+          <geometry>
+            <box>
+              <size>30 0.2 3</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="east_wall_visual">
+          <pose>15 0 1.5 0 0 1.57</pose>
+          <geometry>
+            <box>
+              <size>30 0.2 3</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>0.9 0.9 0.9 1</diffuse>
+          </material>
+        </visual>
+        <!-- 西墙 -->
+        <collision name="west_wall_collision">
+          <pose>-15 0 1.5 0 0 1.57</pose>
+          <geometry>
+            <box>
+              <size>30 0.2 3</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="west_wall_visual">
+          <pose>-15 0 1.5 0 0 1.57</pose>
+          <geometry>
+            <box>
+              <size>30 0.2 3</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>0.9 0.9 0.9 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- 内部墙壁（更复杂布局） -->
+    <model name="inner_walls">
+      <static>true</static>
+      <link name="link">
+        <!-- 客厅分隔墙1 -->
+        <collision name="inner_wall1_collision">
+          <pose>-5 5 1.5 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>6 0.2 3</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="inner_wall1_visual">
+          <pose>-5 5 1.5 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>6 0.2 3</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>0.85 0.85 0.85 1</diffuse>
+          </material>
+        </visual>
+        <!-- 走廊墙1 -->
+        <collision name="inner_wall2_collision">
+          <pose>5 -5 1.5 0 0 1.57</pose>
+          <geometry>
+            <box>
+              <size>8 0.2 3</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="inner_wall2_visual">
+          <pose>5 -5 1.5 0 0 1.57</pose>
+          <geometry>
+            <box>
+              <size>8 0.2 3</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>0.85 0.85 0.85 1</diffuse>
+          </material>
+        </visual>
+        <!-- 狭窄通道墙1 -->
+        <collision name="inner_wall3_collision">
+          <pose>0 -10 1.5 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>3 0.2 3</size>
+            </box>
+          </geometry>.xml
+        </collision>
+        <visual name="inner_wall3_visual">
+          <pose>0 -10 1.5 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>3 0.2 3</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>0.85 0.85 0.85 1</diffuse>
+          </material>
+        </visual>
+        <!-- 迷宫墙1 -->
+        <collision name="inner_wall4_collision">
+          <pose>-8 0 1.5 0 0 1.57</pose>
+          <geometry>
+            <box>
+              <size>6 0.2 3</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="inner_wall4_visual">
+          <pose>-8 0 1.5 0 0 1.57</pose>
+          <geometry>
+            <box>
+              <size>6 0.2 3</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>0.85 0.85 0.85 1</diffuse>
+          </material>
+        </visual>
+        <!-- 迷宫墙2 -->
+        <collision name="inner_wall5_collision">
+          <pose>8 2 1.5 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>4 0.2 3</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="inner_wall5_visual">
+          <pose>8 2 1.5 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>4 0.2 3</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>0.85 0.85 0.85 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- 家具：桌子 -->
+    <model name="table">
+      <static>true</static>
+      <pose>-7 7 0 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>2.5 1.2 0.8</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>2.5 1.2 0.8</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>0.6 0.4 0.2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- 家具：书架 -->
+    <model name="bookshelf">
+      <static>true</static>
+      <pose>10 10 0 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>2 0.4 2</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>2 0.4 2</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>0.4 0.3 0.2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- 家具：沙发 -->
+    <model name="sofa">
+      <static>true</static>
+      <pose>-10 -2 0 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>2.5 0.8 0.6</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>2.5 0.8 0.6</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>0.3 0.3 0.3 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- 家具：电视机 -->
+    <model name="tv">
+      <static>true</static>
+      <pose>12 -12 0 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1.5 0.3 1</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1.5 0.3 1</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>0.2 0.2 0.2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- 装饰：植物1 -->
+    <model name="plant1">
+      <static>true</static>
+      <pose>3 8 0 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>0.2</radius>
+              <length>0.8</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>0.2</radius>
+              <length>0.8</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <diffuse>0.2 0.6 0.2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- 装饰：植物2 -->
+    <model name="plant2">
+      <static>true</static>
+      <pose>-3 -8 0 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <cylinder>
+              <radius>0.2</radius>
+              <length>0.8</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <cylinder>
+              <radius>0.2</radius>
+              <length>0.8</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <diffuse>0.2 0.6 0.2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- 障碍物：chair -->
+    <model name="chair">
+      <pose>-2 2 0.1 0 0 0</pose>
+      <link name="link">
+        <inertial>
+          <mass>5</mass>
+          <inertia>
+            <ixx>0.1</ixx>
+            <iyy>0.1</iyy>
+            <izz>0.1</izz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.5 0.5 0.8</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.3</mu>
+                <mu2>0.3</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.5 0.5 0.8</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>0.3 0.3 0.8 1</diffuse>
+          </material>
+        </visual>
+      </link>
+      <plugin filename="libignition-gazebo6-velocity-control-system.so" name="gz::sim::systems::VelocityControl">
+        <topic>/chair_cmd</topic>
+      </plugin>
+    </model>
+
+    <!-- 障碍物：cart -->
+    <model name="cart">
+      <pose>7 -7 0.1 0 0 0</pose>
+      <link name="link">
+        <inertial>
+          <mass>10</mass>
+          <inertia>
+            <ixx>0.2</ixx>
+            <iyy>0.2</iyy>
+            <izz>0.2</izz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.8 0.6 0.5</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.3</mu>
+                <mu2>0.3</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.8 0.6 0.5</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>0.8 0.2 0.2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+      <plugin filename="libignition-gazebo6-velocity-control-system.so" name="gz::sim::systems::VelocityControl">
+        <topic>/cart_cmd</topic>
+      </plugin>
+    </model>
+
+    <!-- 障碍物：box -->
+    <model name="box">
+      <pose>0 0 0.1 0 0 0</pose>
+      <link name="link">
+        <inertial>
+          <mass>3</mass>
+          <inertia>
+            <ixx>0.05</ixx>
+            <iyy>0.05</iyy>
+            <izz>0.05</izz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.4 0.4 0.4</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.3</mu>
+                <mu2>0.3</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.4 0.4 0.4</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>0.6 0.6 0.2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+      <plugin filename="libignition-gazebo6-velocity-control-system.so" name="gz::sim::systems::VelocityControl">
+        <topic>/box_cmd</topic>
+      </plugin>
+    </model>
+  </world>
+</sdf>
