@@ -1,107 +1,90 @@
 #!/usr/bin/env python3
 import rclpy
+import math
 from rclpy.node import Node
 from geometry_msgs.msg import Twist
 from rclpy.qos import QoSProfile, ReliabilityPolicy, HistoryPolicy
-import random
-import time
 
 class WorldController(Node):
     def __init__(self):
         super().__init__('world_controller')
-        self.get_logger().info('WorldController starting...')
+        
+        # 初始化发布者
+        qos = QoSProfile(
+            depth=10,
+            reliability=ReliabilityPolicy.RELIABLE,
+            history=HistoryPolicy.KEEP_LAST
+        )
+        self.chair_pub = self.create_publisher(Twist, '/chair_cmd', qos)
+        self.cart_pub = self.create_publisher(Twist, '/cart_cmd', qos)
+        self.box_pub = self.create_publisher(Twist, '/box_cmd', qos)
+
+        # ========== 参数配置 ==========
+        # 椅子控制参数
+        self.chair_speed = 1.2      # 线速度提高至1.2 m/s
+        self.chair_interval = 4.0   # 方向切换间隔延长至4秒
+        
+        # 箱子椭圆运动参数
+        self.ellipse_x_amp = 1.5    # X轴振幅 (m/s)
+        self.ellipse_y_amp = 0.8    # Y轴振幅 (m/s)
+        self.ellipse_freq = 0.25    # 频率降低至0.25 Hz
+        
+        # 初始化变量
+        self.start_time = self.get_clock().now().nanoseconds * 1e-9
+        self.last_chair_switch = self.start_time
+        self.chair_direction = 1.0
+        
+        self.create_timer(0.05, self.control_callback)
+        self.get_logger().info("运动参数：椅子速度=%.1fm/s 箱子椭圆轨迹(%.1f,%.1f)" % (
+            self.chair_speed, 
+            self.ellipse_x_amp,
+            self.ellipse_y_amp
+        ))
+
+    def control_callback(self):
         try:
-            # 获取 use_sim_time 参数
-            
-            use_sim_time = self.get_parameter('use_sim_time').get_parameter_value().bool_value
-            self.get_logger().info(f'use_sim_time: {use_sim_time}')
-
-            # 创建发布者（使用可靠 QoS）
-            qos = QoSProfile(depth=10, reliability=ReliabilityPolicy.RELIABLE, history=HistoryPolicy.KEEP_LAST)
-            self.chair_pub = self.create_publisher(Twist, '/chair_cmd', qos)
-            self.cart_pub = self.create_publisher(Twist, '/cart_cmd', qos)
-            self.box_pub = self.create_publisher(Twist, '/box_cmd', qos)
-
-            # 等待仿真时间开始更新
-            if use_sim_time:
-                self.get_logger().info("Waiting for simulated clock to start...")
-                last_time = self.get_clock().now().nanoseconds
-                while rclpy.ok():
-                    now = self.get_clock().now().nanoseconds
-                    if now > last_time:
-                        break
-                    rclpy.spin_once(self, timeout_sec=0.1)
-                self.get_logger().info("Simulated clock detected.")
-
-            # 初始化时间
-            try:
-                self.start_time = self.get_clock().now().to_msg().sec
-            except Exception:
-                self.get_logger().warn('Failed to get initial sim time, using 0')
-                self.start_time = 0
-
-            # 初始化控制变量
-            self.chair_direction = 1.0  # 1.0 正向，-1.0 反向
-            self.stuck_counter = 0
-
-            # 创建定时器：20Hz
-            self.timer = self.create_timer(0.05, self.timer_callback)
-
-            self.get_logger().info('WorldController initialized')
-
-        except Exception as e:
-            self.get_logger().error(f'Initialization failed: {str(e)}')
-            raise
-
-    def timer_callback(self):
-        try:
-            current_time = 0
-            try:
-                current_time = self.get_clock().now().to_msg().sec
-            except Exception:
-                self.get_logger().warn('Failed to get current sim time, using 0')
-
-            # 检测 chair 是否卡住
-            if self.stuck_counter > 40:  # 2秒
-                self.chair_direction *= -1.0
-                self.stuck_counter = 0
-                self.get_logger().info('Chair stuck, reversing direction')
-
-            # 椅子：直线移动
-            chair_cmd = Twist()
-            chair_cmd.linear.x = 0.3 * self.chair_direction
-            self.stuck_counter += 1
-
-            # 小推车：绕圈
-            cart_cmd = Twist()
-            cart_cmd.linear.x = 0.2
-            cart_cmd.angular.z = 0.5
-
-            # 箱子：随机移动
-            box_cmd = Twist()
+            current_time = self.get_clock().now().nanoseconds * 1e-9
             elapsed = current_time - self.start_time
-            if elapsed % 4 < 2:
-                box_cmd.linear.x = 0.2
-                box_cmd.angular.z = random.uniform(-0.3, 0.3)
-            else:
-                box_cmd.linear.y = 0.2
-                box_cmd.angular.z = random.uniform(-0.3, 0.3)
 
-            # 发布消息
+            # === 椅子控制 ===
+            if current_time - self.last_chair_switch >= self.chair_interval:
+                self.chair_direction *= -1
+                self.last_chair_switch = current_time
+                self.get_logger().info(f"椅子方向切换 → {self.chair_direction}")
+            
+            chair_cmd = Twist()
+            chair_cmd.linear.x = self.chair_speed * self.chair_direction  # 提高速度
+
+            # === 推车控制（保持原逻辑） ===
+            cart_cmd = Twist()
+            cart_cmd.linear.x = 0.3
+            cart_cmd.angular.z = 0.4
+
+            # === 箱子椭圆运动 ===
+            box_cmd = Twist()
+            omega = 2 * math.pi * self.ellipse_freq
+            # X轴速度：相位0的正弦波
+            box_cmd.linear.x = self.ellipse_x_amp * math.sin(omega * elapsed)
+            # Y轴速度：相位差90度的正弦波（余弦）
+            box_cmd.linear.y = self.ellipse_y_amp * math.cos(omega * elapsed)
+            # 清除旋转分量
+            box_cmd.angular.z = 0.0
+
+            # 发布指令
             self.chair_pub.publish(chair_cmd)
             self.cart_pub.publish(cart_cmd)
             self.box_pub.publish(box_cmd)
 
         except Exception as e:
-            self.get_logger().error(f'Timer callback failed: {str(e)}')
+            self.get_logger().error(f"控制错误: {str(e)}")
 
 def main(args=None):
     rclpy.init(args=args)
+    controller = WorldController()
     try:
-        controller = WorldController()
         rclpy.spin(controller)
-    except Exception as e:
-        print(f'Error in main: {str(e)}')
+    except KeyboardInterrupt:
+        pass
     finally:
         rclpy.shutdown()
 

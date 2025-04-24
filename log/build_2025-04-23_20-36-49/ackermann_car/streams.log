@@ -1,0 +1,46 @@
+[0.460s] Invoking command in '/home/wcy/ros2_ws/src/ackermann_car': PYTHONPATH=/home/wcy/ros2_ws/build/ackermann_car/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/wcy/ros2_ws/install/ackermann_car/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/ackermann_car build --build-base /home/wcy/ros2_ws/build/ackermann_car/build install --record /home/wcy/ros2_ws/build/ackermann_car/install.log --single-version-externally-managed install_data
+[0.636s] running egg_info
+[0.637s] creating ../../build/ackermann_car/ackermann_car.egg-info
+[0.637s] writing ../../build/ackermann_car/ackermann_car.egg-info/PKG-INFO
+[0.637s] writing dependency_links to ../../build/ackermann_car/ackermann_car.egg-info/dependency_links.txt
+[0.637s] writing entry points to ../../build/ackermann_car/ackermann_car.egg-info/entry_points.txt
+[0.637s] writing requirements to ../../build/ackermann_car/ackermann_car.egg-info/requires.txt
+[0.637s] writing top-level names to ../../build/ackermann_car/ackermann_car.egg-info/top_level.txt
+[0.638s] writing manifest file '../../build/ackermann_car/ackermann_car.egg-info/SOURCES.txt'
+[0.639s] reading manifest file '../../build/ackermann_car/ackermann_car.egg-info/SOURCES.txt'
+[0.639s] writing manifest file '../../build/ackermann_car/ackermann_car.egg-info/SOURCES.txt'
+[0.639s] running build
+[0.639s] running build_py
+[0.639s] creating /home/wcy/ros2_ws/build/ackermann_car/build
+[0.640s] creating /home/wcy/ros2_ws/build/ackermann_car/build/lib
+[0.640s] creating /home/wcy/ros2_ws/build/ackermann_car/build/lib/ackermann_car
+[0.640s] copying ackermann_car/__init__.py -> /home/wcy/ros2_ws/build/ackermann_car/build/lib/ackermann_car
+[0.640s] creating /home/wcy/ros2_ws/build/ackermann_car/build/lib/ackermann_car/controller
+[0.640s] copying ackermann_car/controller/world_ctrl.py -> /home/wcy/ros2_ws/build/ackermann_car/build/lib/ackermann_car/controller
+[0.640s] copying ackermann_car/controller/__init__.py -> /home/wcy/ros2_ws/build/ackermann_car/build/lib/ackermann_car/controller
+[0.640s] running install
+[0.640s] running install_lib
+[0.641s] creating /home/wcy/ros2_ws/install/ackermann_car/lib/python3.10/site-packages/ackermann_car
+[0.641s] creating /home/wcy/ros2_ws/install/ackermann_car/lib/python3.10/site-packages/ackermann_car/controller
+[0.641s] copying /home/wcy/ros2_ws/build/ackermann_car/build/lib/ackermann_car/controller/world_ctrl.py -> /home/wcy/ros2_ws/install/ackermann_car/lib/python3.10/site-packages/ackermann_car/controller
+[0.641s] copying /home/wcy/ros2_ws/build/ackermann_car/build/lib/ackermann_car/controller/__init__.py -> /home/wcy/ros2_ws/install/ackermann_car/lib/python3.10/site-packages/ackermann_car/controller
+[0.641s] copying /home/wcy/ros2_ws/build/ackermann_car/build/lib/ackermann_car/__init__.py -> /home/wcy/ros2_ws/install/ackermann_car/lib/python3.10/site-packages/ackermann_car
+[0.641s] byte-compiling /home/wcy/ros2_ws/install/ackermann_car/lib/python3.10/site-packages/ackermann_car/controller/world_ctrl.py to world_ctrl.cpython-310.pyc
+[0.642s] byte-compiling /home/wcy/ros2_ws/install/ackermann_car/lib/python3.10/site-packages/ackermann_car/controller/__init__.py to __init__.cpython-310.pyc
+[0.642s] byte-compiling /home/wcy/ros2_ws/install/ackermann_car/lib/python3.10/site-packages/ackermann_car/__init__.py to __init__.cpython-310.pyc
+[0.642s] running install_data
+[0.642s] creating /home/wcy/ros2_ws/install/ackermann_car/share/ament_index
+[0.642s] creating /home/wcy/ros2_ws/install/ackermann_car/share/ament_index/resource_index
+[0.643s] creating /home/wcy/ros2_ws/install/ackermann_car/share/ament_index/resource_index/packages
+[0.643s] copying resource/ackermann_car -> /home/wcy/ros2_ws/install/ackermann_car/share/ament_index/resource_index/packages
+[0.643s] copying package.xml -> /home/wcy/ros2_ws/install/ackermann_car/share/ackermann_car
+[0.643s] creating /home/wcy/ros2_ws/install/ackermann_car/share/ackermann_car/launch
+[0.643s] copying launch/gazebo.launch.py -> /home/wcy/ros2_ws/install/ackermann_car/share/ackermann_car/launch
+[0.643s] creating /home/wcy/ros2_ws/install/ackermann_car/share/ackermann_car/worlds
+[0.643s] copying worlds/ackermann_world.sdf -> /home/wcy/ros2_ws/install/ackermann_car/share/ackermann_car/worlds
+[0.643s] running install_egg_info
+[0.644s] Copying ../../build/ackermann_car/ackermann_car.egg-info to /home/wcy/ros2_ws/install/ackermann_car/lib/python3.10/site-packages/ackermann_car-0.0.0-py3.10.egg-info
+[0.645s] running install_scripts
+[0.661s] Installing world_controller script to /home/wcy/ros2_ws/install/ackermann_car/lib/ackermann_car
+[0.661s] writing list of installed files to '/home/wcy/ros2_ws/build/ackermann_car/install.log'
+[0.684s] Invoked command in '/home/wcy/ros2_ws/src/ackermann_car' returned '0': PYTHONPATH=/home/wcy/ros2_ws/build/ackermann_car/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/wcy/ros2_ws/install/ackermann_car/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/ackermann_car build --build-base /home/wcy/ros2_ws/build/ackermann_car/build install --record /home/wcy/ros2_ws/build/ackermann_car/install.log --single-version-externally-managed install_data
