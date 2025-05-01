@@ -1,0 +1,22 @@
+[0.427s] Invoking command in '/home/wcy/ros2_ws/src/ackermann_car': PYTHONPATH=/home/wcy/ros2_ws/build/ackermann_car/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/wcy/ros2_ws/install/ackermann_car/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/ackermann_car build --build-base /home/wcy/ros2_ws/build/ackermann_car/build install --record /home/wcy/ros2_ws/build/ackermann_car/install.log --single-version-externally-managed install_data
+[0.596s] running egg_info
+[0.596s] writing ../../build/ackermann_car/ackermann_car.egg-info/PKG-INFO
+[0.596s] writing dependency_links to ../../build/ackermann_car/ackermann_car.egg-info/dependency_links.txt
+[0.597s] writing entry points to ../../build/ackermann_car/ackermann_car.egg-info/entry_points.txt
+[0.597s] writing requirements to ../../build/ackermann_car/ackermann_car.egg-info/requires.txt
+[0.597s] writing top-level names to ../../build/ackermann_car/ackermann_car.egg-info/top_level.txt
+[0.598s] reading manifest file '../../build/ackermann_car/ackermann_car.egg-info/SOURCES.txt'
+[0.599s] writing manifest file '../../build/ackermann_car/ackermann_car.egg-info/SOURCES.txt'
+[0.599s] running build
+[0.599s] running build_py
+[0.599s] running install
+[0.599s] running install_lib
+[0.600s] running install_data
+[0.600s] copying launch/test_robot_description.launch.py -> /home/wcy/ros2_ws/install/ackermann_car/share/ackermann_car/launch
+[0.600s] running install_egg_info
+[0.601s] removing '/home/wcy/ros2_ws/install/ackermann_car/lib/python3.10/site-packages/ackermann_car-0.0.0-py3.10.egg-info' (and everything under it)
+[0.602s] Copying ../../build/ackermann_car/ackermann_car.egg-info to /home/wcy/ros2_ws/install/ackermann_car/lib/python3.10/site-packages/ackermann_car-0.0.0-py3.10.egg-info
+[0.602s] running install_scripts
+[0.617s] Installing world_controller script to /home/wcy/ros2_ws/install/ackermann_car/lib/ackermann_car
+[0.617s] writing list of installed files to '/home/wcy/ros2_ws/build/ackermann_car/install.log'
+[0.634s] Invoked command in '/home/wcy/ros2_ws/src/ackermann_car' returned '0': PYTHONPATH=/home/wcy/ros2_ws/build/ackermann_car/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/wcy/ros2_ws/install/ackermann_car/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/ackermann_car build --build-base /home/wcy/ros2_ws/build/ackermann_car/build install --record /home/wcy/ros2_ws/build/ackermann_car/install.log --single-version-externally-managed install_data

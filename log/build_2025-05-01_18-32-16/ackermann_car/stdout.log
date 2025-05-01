@@ -34,9 +34,12 @@ creating /home/wcy/ros2_ws/install/ackermann_car/share/ament_index/resource_inde
 copying resource/ackermann_car -> /home/wcy/ros2_ws/install/ackermann_car/share/ament_index/resource_index/packages
 copying package.xml -> /home/wcy/ros2_ws/install/ackermann_car/share/ackermann_car
 creating /home/wcy/ros2_ws/install/ackermann_car/share/ackermann_car/launch
+copying launch/test_robot_description.launch.py -> /home/wcy/ros2_ws/install/ackermann_car/share/ackermann_car/launch
 copying launch/gazebo.launch.py -> /home/wcy/ros2_ws/install/ackermann_car/share/ackermann_car/launch
 creating /home/wcy/ros2_ws/install/ackermann_car/share/ackermann_car/worlds
 copying worlds/ackermann_world.sdf -> /home/wcy/ros2_ws/install/ackermann_car/share/ackermann_car/worlds
+creating /home/wcy/ros2_ws/install/ackermann_car/share/ackermann_car/urdf
+copying urdf/ackermann_car.xacro -> /home/wcy/ros2_ws/install/ackermann_car/share/ackermann_car/urdf
 running install_egg_info
 Copying ../../build/ackermann_car/ackermann_car.egg-info to /home/wcy/ros2_ws/install/ackermann_car/lib/python3.10/site-packages/ackermann_car-0.0.0-py3.10.egg-info
 running install_scripts

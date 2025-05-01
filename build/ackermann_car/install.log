@@ -6,8 +6,10 @@
 /home/wcy/ros2_ws/install/ackermann_car/lib/python3.10/site-packages/ackermann_car/controller/__pycache__/__init__.cpython-310.pyc
 /home/wcy/ros2_ws/install/ackermann_car/share/ament_index/resource_index/packages/ackermann_car
 /home/wcy/ros2_ws/install/ackermann_car/share/ackermann_car/package.xml
+/home/wcy/ros2_ws/install/ackermann_car/share/ackermann_car/launch/test_robot_description.launch.py
 /home/wcy/ros2_ws/install/ackermann_car/share/ackermann_car/launch/gazebo.launch.py
 /home/wcy/ros2_ws/install/ackermann_car/share/ackermann_car/worlds/ackermann_world.sdf
+/home/wcy/ros2_ws/install/ackermann_car/share/ackermann_car/urdf/ackermann_car.xacro
 /home/wcy/ros2_ws/install/ackermann_car/lib/python3.10/site-packages/ackermann_car-0.0.0-py3.10.egg-info/PKG-INFO
 /home/wcy/ros2_ws/install/ackermann_car/lib/python3.10/site-packages/ackermann_car-0.0.0-py3.10.egg-info/requires.txt
 /home/wcy/ros2_ws/install/ackermann_car/lib/python3.10/site-packages/ackermann_car-0.0.0-py3.10.egg-info/dependency_links.txt

@@ -552,5 +552,9 @@
         <topic>/box_cmd</topic>
       </plugin>
     </model>
+    <!-- <plugin name="ros_init" filename="libros_ign_init.so"/>
+    <plugin name="ros_factory" filename="libros_ign_factory.so"/>
+    <plugin name="ros_clock" filename="libros_ign_clock.so"/> -->
+
   </world>
 </sdf>

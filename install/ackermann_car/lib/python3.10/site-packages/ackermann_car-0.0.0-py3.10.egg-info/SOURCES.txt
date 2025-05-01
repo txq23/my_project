@@ -12,8 +12,10 @@ ackermann_car/__init__.py
 ackermann_car/controller/__init__.py
 ackermann_car/controller/world_ctrl.py
 launch/gazebo.launch.py
+launch/test_robot_description.launch.py
 resource/ackermann_car
 test/test_copyright.py
 test/test_flake8.py
 test/test_pep257.py
+urdf/ackermann_car.xacro
 worlds/ackermann_world.sdf
