@@ -1,0 +1,3 @@
+[console_scripts]
+world_controller = ackermann_car.controller.world_ctrl:main
+
